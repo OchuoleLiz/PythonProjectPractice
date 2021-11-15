@@ -32,7 +32,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, username, first_name, last_name, password, **extra_fields)
 
-    def create_staffuser(self, email, username, password=None, **extra_fields):
+    def create_staffuser(self, email, username, fist_name, last_name, password=None, **extra_fields):
         """Creates and saves the staffuser"""
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', False)
@@ -40,9 +40,9 @@ class UserManager(BaseUserManager):
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Staff must have is_staff=True.')
 
-        return self._create_user(email, username, password, **extra_fields)
+        return self._create_user(email, username, fist_name, last_name, password, **extra_fields)
 
-    def create_superuser(self, email, username, password=None, **extra_fields):
+    def create_superuser(self, email, username, fist_name, last_name, password=None, **extra_fields):
         """Creates and saves the superuser"""
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -52,7 +52,7 @@ class UserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self._create_user(email, username, password, **extra_fields)
+        return self._create_user(email, username, fist_name, last_name, password, **extra_fields)
 
 class Account(AbstractBaseUser):
     """
