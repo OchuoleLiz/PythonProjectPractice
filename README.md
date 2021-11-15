@@ -1,2 +1,2 @@
 # PythonProjectPractice
-Side Hustle Internship Stage 7 project practice.
+KodeCamp Internship Stage 7 project practice.
