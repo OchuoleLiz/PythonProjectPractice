@@ -56,7 +56,7 @@ class UserManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     """
-    This is class that contains the custom fields in the custom user model
+    This is class that contains the new custom fields in the custom user model
     """
     email = models.EmailField(verbose_name='email address', max_length=60, unique=True)
     first_name = models.CharField(verbose_name='first name', max_length=40, unique=True)
