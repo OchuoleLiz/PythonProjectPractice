@@ -26,26 +26,26 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, username, first_name, last_name, password=None, **extra_fields):
+    def create_user(self, email, username, first_name, last_name, password, **extra_fields):
         """Creates and saves the user"""
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_staff', False)  # Makes sure that the new user does not have staff permission 
+        extra_fields.setdefault('is_superuser', False)  # Makes sure that the new user does not have superuser permission
         return self._create_user(email, username, first_name, last_name, password, **extra_fields)
 
-    def create_staffuser(self, email, username, fist_name, last_name, password=None, **extra_fields):
-        """Creates and saves the staffuser"""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', False)
+    def create_staffuser(self, email, username, fist_name, last_name, password, **extra_fields):
+        """Creates and saves the staffuser and determines the permissions it has."""
+        extra_fields.setdefault('is_staff', True) # Makes sure that the new staffuser has staff permission
+        extra_fields.setdefault('is_superuser', False) # Makes sure that the new staffuser does not have superuser permission
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Staff must have is_staff=True.')
 
         return self._create_user(email, username, fist_name, last_name, password, **extra_fields)
 
-    def create_superuser(self, email, username, fist_name, last_name, password=None, **extra_fields):
-        """Creates and saves the superuser"""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+    def create_superuser(self, email, username, fist_name, last_name, password, **extra_fields):
+        """Creates and saves the superuser and makes sure it has all the permissions."""
+        extra_fields.setdefault('is_staff', True)  
+        extra_fields.setdefault('is_superuser', True) 
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
